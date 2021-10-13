@@ -3,5 +3,8 @@
 
     <string name="walkthrough_label_1">Access our\n Extended Catalog</string>
     <string name="walkthrough_label_2">Filter Fighters</string>
-    <string name="walkthrough_label_3">And More...</string>
+    <string name="walkthrough_label_3">And More…</string>
+
+    <string name="fighters">Fighters</string>
+    <string name="filters_menu">Filters</string>
 </resources>
