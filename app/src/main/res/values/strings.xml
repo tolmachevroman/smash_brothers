@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Smash Bros</string>
+
+    <string name="walkthrough_label_1">Access our\n Extended Catalog</string>
+    <string name="walkthrough_label_2">Filter Fighters</string>
+    <string name="walkthrough_label_3">And More...</string>
 </resources>

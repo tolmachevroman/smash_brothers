@@ -8,6 +8,14 @@
     <fragment
         android:id="@+id/launcher"
         android:name="com.koombea.smash.bros.views.fragments.LauncherFragment">
+        <action
+            android:id="@+id/navigate_to_walkthrough"
+            app:destination="@id/walkthrough" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/walkthrough"
+        android:name="com.koombea.smash.bros.views.fragments.WalkthroughFragment">
 
     </fragment>
 
