@@ -57,7 +57,7 @@
         android:layout_margin="16dp"
         android:src="@mipmap/next_arrow"
         android:visibility="invisible"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="@android:color/white"
         app:elevation="16dp"
         app:layout_constraintBottom_toBottomOf="@id/dots"
         app:layout_constraintEnd_toEndOf="parent"

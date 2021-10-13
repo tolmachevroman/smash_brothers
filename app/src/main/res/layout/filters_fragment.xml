@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_grey"
     tools:context=".views.activities.MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -15,6 +16,146 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/filters"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@android:color/white" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sort_by_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/filters_sort_by"
+                android:textColor="@color/medium_grey" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/dark_grey"
+                android:dividerPadding="4dp"
+                android:paddingStart="16dp"
+                android:showDividers="middle">
+
+                <RadioButton
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/filters_name"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/filters_price"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/filters_rate"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/downloads"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/filters_downloads"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filter_by_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sort_by_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/filters_filter_by"
+                android:textColor="@color/medium_grey" />
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                style="@style/CustomRatingBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:paddingTop="16dp"
+                android:paddingBottom="32dp"
+                android:stepSize="1"
+                tools:rating="2" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/reset_button"
+        style="@style/CustomFilterButtonsStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/filters_reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/apply_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/apply_button"
+        style="@style/CustomFilterButtonsStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/filters_apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/reset_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

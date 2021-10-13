@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/filters_menu"
         app:title="@string/fighters"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@android:color/white" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_bar"

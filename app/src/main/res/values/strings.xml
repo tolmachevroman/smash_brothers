@@ -6,7 +6,18 @@
     <string name="walkthrough_label_3">And More…</string>
 
     <string name="fighters">Fighters</string>
+
     <string name="filters">Filters</string>
+    <string name="filters_sort_by">Sort by</string>
+    <string name="filters_name">Name</string>
+    <string name="filters_price">Price</string>
+    <string name="filters_rate">Rate</string>
+    <string name="filters_downloads">Downloads</string>
+    <string name="filters_filter_by">Filter by</string>
+    <string name="filters_reset">Reset</string>
+    <string name="filters_apply">Apply</string>
+
+
 
     <string name="filters_menu">Filters</string>
 </resources>
