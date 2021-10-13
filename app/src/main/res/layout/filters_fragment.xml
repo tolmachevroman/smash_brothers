@@ -51,39 +51,31 @@
 
                 <RadioButton
                     android:id="@+id/name"
+                    style="@style/CustomFilterRadioButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/filters_name"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:text="@string/filters_name" />
 
                 <RadioButton
                     android:id="@+id/price"
+                    style="@style/CustomFilterRadioButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/filters_price"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:text="@string/filters_price" />
 
                 <RadioButton
                     android:id="@+id/rate"
+                    style="@style/CustomFilterRadioButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/filters_rate"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:text="@string/filters_rate" />
 
                 <RadioButton
                     android:id="@+id/downloads"
+                    style="@style/CustomFilterRadioButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/filters_downloads"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:text="@string/filters_downloads" />
 
             </RadioGroup>
 

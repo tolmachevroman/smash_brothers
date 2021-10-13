@@ -41,4 +41,10 @@
         <item name="cornerRadius">8dp</item>
     </style>
 
+    <style name="CustomFilterRadioButtonsStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:buttonTint">@color/blue_500</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">16dp</item>
+    </style>
 </resources>
