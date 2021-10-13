@@ -7,43 +7,48 @@
     android:background="@color/blue_500"
     tools:context=".views.activities.MainActivity">
 
-    <com.afollestad.viewpagerdots.DotsIndicator
+    <LinearLayout
         android:id="@+id/dots"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginBottom="48dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/label"
+        <ImageView
+            android:id="@+id/dot_1"
+            android:layout_width="@dimen/dot_size"
+            android:layout_height="@dimen/dot_size"
+            android:src="@drawable/dot_selected" />
+
+        <ImageView
+            android:id="@+id/dot_2"
+            android:layout_width="@dimen/dot_size"
+            android:layout_height="@dimen/dot_size"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/dot_unselected" />
+
+        <ImageView
+            android:id="@+id/dot_3"
+            android:layout_width="@dimen/dot_size"
+            android:layout_height="@dimen/dot_size"
+            android:src="@drawable/dot_unselected" />
+
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:text="@string/walkthrough_label_1"
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/dots"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/walkthrough_label_1" />
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="100dp"
-        android:src="@mipmap/walkthrough_1"
-        app:layout_constraintBottom_toTopOf="@+id/label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/walkthrough_1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -51,11 +56,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@mipmap/next_arrow"
+        android:visibility="invisible"
         app:backgroundTint="@color/white"
         app:elevation="16dp"
         app:layout_constraintBottom_toBottomOf="@id/dots"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dots"
-        app:tint="@color/blue_500" />
+        app:tint="@color/blue_500"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
