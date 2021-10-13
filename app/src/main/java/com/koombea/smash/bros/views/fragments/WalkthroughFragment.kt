@@ -28,7 +28,6 @@ class WalkthroughFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val viewPager = binding.pager
-        val dots = binding.dots
         context?.apply {
             viewPager.adapter = WalkthroughPagerAdapter(this)
             viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

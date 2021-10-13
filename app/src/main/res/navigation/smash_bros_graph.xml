@@ -24,7 +24,14 @@
     <fragment
         android:id="@+id/fighters"
         android:name="com.koombea.smash.bros.views.fragments.FightersFragment">
-
+        <action
+            android:id="@+id/navigate_to_filters"
+            app:destination="@id/filters" />
     </fragment>
 
+    <fragment
+        android:id="@+id/filters"
+        android:name="com.koombea.smash.bros.views.fragments.FiltersFragment">
+
+    </fragment>
 </navigation>

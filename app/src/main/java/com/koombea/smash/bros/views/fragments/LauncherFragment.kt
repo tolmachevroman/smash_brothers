@@ -24,7 +24,6 @@ class LauncherFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         // TODO check if launched for the 1st time, or skip
 
         //navigate to Walkthrough after 2 seconds
