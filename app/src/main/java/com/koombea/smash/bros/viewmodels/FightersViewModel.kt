@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.koombea.smash.bros.data.SmashBrosRepository
+import com.koombea.smash.bros.data.models.Fighter
 import com.koombea.smash.bros.data.models.Universe
 import com.koombea.smash.bros.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,5 +36,21 @@ class FightersViewModel @Inject constructor(private val repository: SmashBrosRep
         }
     }
 
-    fun getFighters() {}
+    fun getFighters(): LiveData<Resource<List<Fighter>>> = liveData {
+        emit(Resource.loading(listOf()))
+
+        var errorMessage: String? = null
+        val response = try {
+            repository.getFighters("", 0) //TODO change
+        } catch (e: Exception) {
+            errorMessage = e.toString()
+            null
+        }
+
+        if (response != null) {
+            emit(Resource.success(response))
+        } else {
+            emit(Resource.error(null, errorMessage))
+        }
+    }
 }

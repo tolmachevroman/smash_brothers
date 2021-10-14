@@ -1,7 +1,9 @@
 package com.koombea.smash.bros.data.webservice
 
+import com.koombea.smash.bros.data.models.Fighter
 import com.koombea.smash.bros.data.models.Universe
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface WebService {
 
@@ -11,4 +13,10 @@ interface WebService {
 
     @GET("universes")
     suspend fun getUniverses(): List<Universe>
+
+    @GET("fighters")
+    suspend fun getFighters(
+        @Query("universe") universe: String,
+        @Query("rate") rate: Int
+    ): List<Fighter>
 }

@@ -8,9 +8,7 @@ import javax.inject.Inject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.logging.HttpLoggingInterceptor
-
 import okhttp3.OkHttpClient
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -37,5 +35,7 @@ class SmashBrosRepository @Inject constructor() {
     }
 
     suspend fun getUniverses() = apiClient.getUniverses()
+
+    suspend fun getFighters(universe: String, rate: Int) = apiClient.getFighters(universe, rate)
 
 }

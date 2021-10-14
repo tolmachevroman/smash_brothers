@@ -71,7 +71,20 @@ class FightersFragment : Fragment() {
 
 
                     //TODO refactor
-                    viewModel.getFighters()
+                    viewModel.getFighters().observe(
+                        viewLifecycleOwner, ResourceObserver(
+                            javaClass.simpleName,
+                            hideLoading = { binding.progressBar.visibility = View.GONE },
+                            showLoading = { binding.progressBar.visibility = View.VISIBLE },
+                            onSuccess = { fighters ->
+
+
+                            },
+                            onError = { errorMessage ->
+                                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                            }
+                        )
+                    )
 
                 },
                 onError = { errorMessage ->
