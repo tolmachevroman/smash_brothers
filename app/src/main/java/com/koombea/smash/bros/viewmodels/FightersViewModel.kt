@@ -12,7 +12,6 @@ import com.koombea.smash.bros.data.models.Universe
 import com.koombea.smash.bros.utils.Resource
 import com.koombea.smash.bros.views.adapters.UniversesAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,8 +20,6 @@ class FightersViewModel @Inject constructor(
     private val resources: Resources,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
-
-    private val fighters = mutableListOf<Fighter>()
 
     fun getUniverses(): LiveData<Resource<List<Universe>>> = liveData {
         emit(Resource.loading(listOf()))
@@ -37,8 +34,9 @@ class FightersViewModel @Inject constructor(
 
         if (response != null) {
             val universes = mutableListOf<Universe>()
-            universes.add(0, Universe("", UniversesAdapter.ALL_UNIVERSES, ""))
             universes.addAll(response)
+            universes.add(0, Universe("", UniversesAdapter.ALL_UNIVERSES, ""))
+
             emit(Resource.success(universes))
         } else {
             emit(Resource.error(null, errorMessage))
@@ -48,34 +46,20 @@ class FightersViewModel @Inject constructor(
     fun getFighters(universeName: String = ""): LiveData<Resource<List<Fighter>>> = liveData {
         emit(Resource.loading(listOf()))
 
-        //Simple cache
-        if (fighters.isEmpty()) {
-            var errorMessage: String? = null
-            val response = try {
-                repository.getFighters("", 0) //TODO refactor
-            } catch (e: Exception) {
-                errorMessage = e.toString()
-                null
-            }
+        var errorMessage: String? = null
+        val response = try {
+            repository.getFighters(
+                if (universeName == UniversesAdapter.ALL_UNIVERSES) "" else universeName
+            )
+        } catch (e: Exception) {
+            errorMessage = e.toString()
+            null
+        }
 
-            if (response != null) {
-                fighters.addAll(response)
-                emit(Resource.success(fighters.filterByRate().sort()))
-            } else {
-                emit(Resource.error(null, errorMessage))
-            }
+        if (response != null) {
+            emit(Resource.success(response.filterByRate().sort()))
         } else {
-            if (universeName == UniversesAdapter.ALL_UNIVERSES) {
-                emit(Resource.success(fighters.filterByRate().sort()))
-            } else {
-                emit(
-                    Resource.success(
-                        fighters.filterByRate().filterByUniverseName(universeName)
-                            .sort()
-                    )
-                )
-            }
-
+            emit(Resource.error(null, errorMessage))
         }
     }
 
@@ -99,7 +83,16 @@ class FightersViewModel @Inject constructor(
         return filter { it.rate >= minStars }
     }
 
-    private fun List<Fighter>.filterByUniverseName(universeName: String): List<Fighter> {
-        return filter { it.universe == universeName }
+    fun setCurrentUniverse(universeName: String) {
+        sharedPreferences.edit()
+            .putString(resources.getString(R.string.key_current_universe), universeName)
+            .apply()
+    }
+
+    fun getCurrentUniverse(): String {
+        return sharedPreferences.getString(
+            resources.getString(R.string.key_current_universe),
+            UniversesAdapter.ALL_UNIVERSES
+        ) ?: UniversesAdapter.ALL_UNIVERSES
     }
 }

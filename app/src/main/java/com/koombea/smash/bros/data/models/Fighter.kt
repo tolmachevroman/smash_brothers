@@ -11,7 +11,7 @@ data class Fighter(
     val price: Int,
     val popular: Boolean,
     val rate: Int,
-    val downloads: String,
+    val downloads: Int,
     val description: String,
     val imageURL: String
 ) : Parcelable

@@ -11,7 +11,7 @@ import com.koombea.smash.bros.databinding.UniversesAdapterItemBinding
 class UniversesAdapter(
     context: Context,
     private val data: List<Universe>,
-    private var universeName: String = ALL_UNIVERSES,
+    private var universeName: String,
     private val onClickListener: ((String) -> Unit)
 ) : RecyclerView.Adapter<UniversesAdapter.ViewHolder>() {
 
@@ -36,10 +36,12 @@ class UniversesAdapter(
         changeButtonColor(holder, position)
         holder.button.text = data[position].name
         holder.button.setOnClickListener {
+            val previousPosition: Int = data.indexOfFirst { u -> u.name == universeName }
+            notifyItemChanged(previousPosition)
+
             universeName = data[position].name
             onClickListener.invoke(universeName)
             changeButtonColor(holder, position)
-            notifyDataSetChanged()
         }
     }
 

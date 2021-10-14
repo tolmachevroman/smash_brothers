@@ -24,6 +24,7 @@
     <string name="filters_menu">Filters</string>
 
     <string name="key_opened_before">opened_before</string>
+    <string name="key_current_universe">current_universe</string>
     <string name="key_sort_by">sort_by</string>
     <string name="key_filter_by">filter_by</string>
 </resources>

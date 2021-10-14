@@ -46,7 +46,7 @@ class FightersAdapter(
             holder.rate.text = String.format(ratePlaceholder, rate)
             holder.downloads.text = String.format(
                 downloadsPlaceholder,
-                NumberFormat.getNumberInstance(Locale.US).format(downloads.toInt())
+                NumberFormat.getNumberInstance(Locale.US).format(downloads)
             )
 
             Picasso.get()

@@ -30,12 +30,10 @@ class SmashBrosRepository @Inject constructor() {
             .build()
 
         apiClient = retrofitClient.create(WebService::class.java)
-
-        //TODO You error handle by catching the HttpException which is thrown by the retrofit framework for non HTTP 200-ish response codes
     }
 
     suspend fun getUniverses() = apiClient.getUniverses()
 
-    suspend fun getFighters(universeName: String, rate: Int) = apiClient.getFighters(universeName, rate)
+    suspend fun getFighters(universeName: String) = apiClient.getFighters(universeName)
 
 }

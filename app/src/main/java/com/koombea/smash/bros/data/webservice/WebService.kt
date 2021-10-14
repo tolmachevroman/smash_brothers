@@ -15,8 +15,5 @@ interface WebService {
     suspend fun getUniverses(): List<Universe>
 
     @GET("fighters")
-    suspend fun getFighters(
-        @Query("universe") universe: String,
-        @Query("rate") rate: Int
-    ): List<Fighter>
+    suspend fun getFighters(@Query("universe") universe: String): List<Fighter>
 }

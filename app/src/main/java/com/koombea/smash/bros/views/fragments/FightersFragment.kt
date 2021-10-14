@@ -77,9 +77,14 @@ class FightersFragment : Fragment() {
     }
 
     private fun showUniverses(universes: List<Universe>) {
-        context?.let {
-            val adapter = UniversesAdapter(it, universes) { universeName ->
-                viewModel.getFighters(universeName).observe(
+        context?.apply {
+            val currentUniverse = viewModel.getCurrentUniverse()
+            val adapter = UniversesAdapter(this, universes, currentUniverse) { universe ->
+                //Set newly selected universe
+                viewModel.setCurrentUniverse(universe)
+
+                //Get fighters from current universe
+                viewModel.getFighters(universe).observe(
                     viewLifecycleOwner, ResourceObserver(
                         javaClass.simpleName,
                         ::hideLoading,
@@ -90,13 +95,20 @@ class FightersFragment : Fragment() {
                 )
             }
             binding.universesList.layoutManager = LinearLayoutManager(
-                activity,
+                this,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
             binding.universesList.adapter = adapter
 
-            viewModel.getFighters().observe(
+            //Get fighters from last selected universe
+            val position = universes.indexOfFirst { u -> u.name == currentUniverse }
+            if (position == 0) {
+                binding.universesList.scrollToPosition(position)
+            } else {
+                binding.universesList.scrollToPosition(position - 1)
+            }
+            viewModel.getFighters(currentUniverse).observe(
                 viewLifecycleOwner, ResourceObserver(
                     javaClass.simpleName,
                     ::hideLoading,
@@ -109,19 +121,19 @@ class FightersFragment : Fragment() {
     }
 
     private fun showFighters(fighters: List<Fighter>) {
-        context?.let {
-            val adapter = FightersAdapter(it, fighters) { fighter ->
+        context?.apply {
+            val adapter = FightersAdapter(this, fighters) { fighter ->
                 val directions = FightersFragmentDirections.navigateToFighterDetails(fighter)
                 findNavController().navigate(directions)
             }
             binding.fightersList.layoutManager = LinearLayoutManager(
-                activity,
+                this,
                 LinearLayoutManager.VERTICAL,
                 false
             )
             binding.fightersList.addItemDecoration(
                 DividerItemDecoration(
-                    context,
+                    this,
                     LinearLayoutManager.VERTICAL
                 )
             )

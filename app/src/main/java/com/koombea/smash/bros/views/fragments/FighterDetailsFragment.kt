@@ -47,7 +47,7 @@ class FighterDetailsFragment : Fragment() {
             context?.resources?.apply {
                 binding.downloads.text = String.format(
                     getString(R.string.fighters_adapter_downloads),
-                    NumberFormat.getNumberInstance(Locale.US).format(fighter.downloads.toInt())
+                    NumberFormat.getNumberInstance(Locale.US).format(fighter.downloads)
                 )
             }
 
