@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_700"
+    android:background="@color/launcher_blue"
     tools:context=".views.activities.MainActivity">
 
     <ImageView
-        android:layout_width="210dp"
-        android:layout_height="210dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:src="@mipmap/launcher_logo"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

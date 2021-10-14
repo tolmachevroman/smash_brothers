@@ -5,7 +5,8 @@
     <color name="blue_700">#FF2360B1</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="launcher_blue">#003C7E</color>
+    <color name="walkthrough_blue">#1A90F0</color>
     <color name="dark_grey">#404040</color>
     <color name="medium_grey">#979797</color>
     <color name="light_grey">#E5E5E5</color>
