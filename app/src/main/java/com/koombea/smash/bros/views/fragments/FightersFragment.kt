@@ -17,6 +17,7 @@ import com.koombea.smash.bros.views.activities.MainActivity
 import com.koombea.smash.bros.views.adapters.UniversesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.koombea.smash.bros.data.models.Fighter
 import com.koombea.smash.bros.views.adapters.FightersAdapter
 
 
@@ -55,57 +56,10 @@ class FightersFragment : Fragment() {
         viewModel.getUniverses().observe(
             viewLifecycleOwner, ResourceObserver(
                 javaClass.simpleName,
-                hideLoading = { binding.progressBar.visibility = View.GONE },
-                showLoading = { binding.progressBar.visibility = View.VISIBLE },
-                onSuccess = { universes: List<Universe> ->
-                    //TODO refactor
-                    context?.let {
-                        val adapter = UniversesAdapter(it, universes) { universeId ->
-                            //TODO filter fighters by universeId
-                        }
-                        binding.universesList.layoutManager = LinearLayoutManager(
-                            activity,
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                        )
-                        binding.universesList.adapter = adapter
-                    }
-
-
-                    //TODO refactor
-                    viewModel.getFighters().observe(
-                        viewLifecycleOwner, ResourceObserver(
-                            javaClass.simpleName,
-                            hideLoading = { binding.progressBar.visibility = View.GONE },
-                            showLoading = { binding.progressBar.visibility = View.VISIBLE },
-                            onSuccess = { fighters ->
-                                //TODO refactor
-                                context?.let {
-                                    val adapter = FightersAdapter(it, fighters) { fighter ->
-                                        val directions = FightersFragmentDirections.navigateToFighterDetails(fighter)
-                                        findNavController().navigate(directions)
-                                    }
-                                    binding.fightersList.layoutManager = LinearLayoutManager(
-                                        activity,
-                                        LinearLayoutManager.VERTICAL,
-                                        false
-                                    )
-                                    binding.fightersList.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-                                    binding.fightersList.adapter = adapter
-                                }
-
-
-                            },
-                            onError = { errorMessage ->
-                                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-                            }
-                        )
-                    )
-
-                },
-                onError = { errorMessage ->
-                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-                }
+                ::hideLoading,
+                ::showLoading,
+                ::showUniverses,
+                ::showErrorMessage
             )
         )
     }
@@ -122,4 +76,68 @@ class FightersFragment : Fragment() {
         return true
     }
 
+    private fun showUniverses(universes: List<Universe>) {
+        context?.let {
+            val adapter = UniversesAdapter(it, universes) { universeName ->
+                viewModel.getFighters(universeName).observe(
+                    viewLifecycleOwner, ResourceObserver(
+                        javaClass.simpleName,
+                        ::hideLoading,
+                        ::showLoading,
+                        ::showFighters,
+                        ::showErrorMessage
+                    )
+                )
+            }
+            binding.universesList.layoutManager = LinearLayoutManager(
+                activity,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            binding.universesList.adapter = adapter
+
+            viewModel.getFighters().observe(
+                viewLifecycleOwner, ResourceObserver(
+                    javaClass.simpleName,
+                    ::hideLoading,
+                    ::showLoading,
+                    ::showFighters,
+                    ::showErrorMessage
+                )
+            )
+        }
+    }
+
+    private fun showFighters(fighters: List<Fighter>) {
+        context?.let {
+            val adapter = FightersAdapter(it, fighters) { fighter ->
+                val directions = FightersFragmentDirections.navigateToFighterDetails(fighter)
+                findNavController().navigate(directions)
+            }
+            binding.fightersList.layoutManager = LinearLayoutManager(
+                activity,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            binding.fightersList.addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+            binding.fightersList.adapter = adapter
+        }
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showErrorMessage(errorMessage: String?) {
+        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+    }
 }

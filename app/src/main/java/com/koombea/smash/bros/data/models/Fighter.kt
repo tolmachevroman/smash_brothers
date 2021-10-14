@@ -8,7 +8,7 @@ data class Fighter(
     val objectID: String,
     val name: String,
     val universe: String,
-    val price: String,
+    val price: Int,
     val popular: Boolean,
     val rate: Int,
     val downloads: String,

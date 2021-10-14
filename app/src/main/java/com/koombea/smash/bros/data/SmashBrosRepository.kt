@@ -36,6 +36,6 @@ class SmashBrosRepository @Inject constructor() {
 
     suspend fun getUniverses() = apiClient.getUniverses()
 
-    suspend fun getFighters(universe: String, rate: Int) = apiClient.getFighters(universe, rate)
+    suspend fun getFighters(universeName: String, rate: Int) = apiClient.getFighters(universeName, rate)
 
 }
