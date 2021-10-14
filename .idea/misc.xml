@@ -6,6 +6,7 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/drawable/dot_selected.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/dot_unselected.xml" value="0.2171875" />
+        <entry key="app/src/main/res/drawable/fighter_details_price_background.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/ic_dot_selected.xml" value="0.1109375" />
         <entry key="app/src/main/res/drawable/ic_dot_unselected.xml" value="0.1109375" />
         <entry key="app/src/main/res/drawable/ic_rating.xml" value="0.2171875" />
@@ -14,6 +15,7 @@
         <entry key="app/src/main/res/drawable/radio_group_divider.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14266304347826086" />
         <entry key="app/src/main/res/layout/fighter_adapter_item.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fighter_details_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fighters_fragment.xml" value="0.14266304347826086" />
         <entry key="app/src/main/res/layout/filters_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/launcher_fragment.xml" value="0.14266304347826086" />

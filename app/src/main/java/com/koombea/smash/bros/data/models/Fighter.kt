@@ -1,7 +1,9 @@
 package com.koombea.smash.bros.data.models
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Fighter(
     val objectID: String,
     val name: String,
@@ -12,4 +14,4 @@ data class Fighter(
     val downloads: String,
     val description: String,
     val imageURL: String
-) : Serializable
+) : Parcelable

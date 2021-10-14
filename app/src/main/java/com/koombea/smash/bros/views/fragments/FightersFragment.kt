@@ -82,7 +82,8 @@ class FightersFragment : Fragment() {
                                 //TODO refactor
                                 context?.let {
                                     val adapter = FightersAdapter(it, fighters) { fighter ->
-                                        //TODO navigate to details
+                                        val directions = FightersFragmentDirections.navigateToFighterDetails(fighter)
+                                        findNavController().navigate(directions)
                                     }
                                     binding.fightersList.layoutManager = LinearLayoutManager(
                                         activity,

@@ -29,9 +29,20 @@
         <action
             android:id="@+id/navigate_to_filters"
             app:destination="@id/filters" />
+        <action
+            android:id="@+id/navigate_to_fighter_details"
+            app:destination="@id/fighter_details" />
     </fragment>
 
     <fragment
         android:id="@+id/filters"
         android:name="com.koombea.smash.bros.views.fragments.FiltersFragment" />
+
+    <fragment
+        android:id="@+id/fighter_details"
+        android:name="com.koombea.smash.bros.views.fragments.FighterDetailsFragment">
+        <argument
+            android:name="fighter"
+            app:argType="com.koombea.smash.bros.data.models.Fighter" />
+    </fragment>
 </navigation>
