@@ -9,6 +9,8 @@ import com.koombea.smash.bros.R
 import com.koombea.smash.bros.data.SmashBrosRepository
 import com.koombea.smash.bros.data.models.Fighter
 import com.koombea.smash.bros.data.models.Universe
+import com.koombea.smash.bros.data.models.filterByRate
+import com.koombea.smash.bros.data.models.sortByField
 import com.koombea.smash.bros.utils.Resource
 import com.koombea.smash.bros.views.adapters.UniversesAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -57,30 +59,20 @@ class FightersViewModel @Inject constructor(
         }
 
         if (response != null) {
-            emit(Resource.success(response.filterByRate().sort()))
+            val rate = sharedPreferences.getInt(
+                resources.getString(R.string.key_filter_by),
+                FiltersViewModel.DEFAULT_STARS
+            )
+
+            val field = sharedPreferences.getInt(
+                resources.getString(R.string.key_sort_by),
+                FiltersViewModel.DEFAULT_SORT_BY
+            )
+
+            emit(Resource.success(response.filterByRate(rate).sortByField(field)))
         } else {
             emit(Resource.error(null, errorMessage))
         }
-    }
-
-    private fun List<Fighter>.sort(): List<Fighter> {
-        return when (sharedPreferences.getInt(
-            resources.getString(R.string.key_sort_by),
-            FiltersViewModel.DEFAULT_SORT_BY
-        )) {
-            1 -> this.sortedBy { it.name }
-            2 -> this.sortedBy { it.price }
-            3 -> this.sortedBy { it.rate }
-            else -> this.sortedBy { it.downloads }
-        }
-    }
-
-    private fun List<Fighter>.filterByRate(): List<Fighter> {
-        val minStars = sharedPreferences.getInt(
-            resources.getString(R.string.key_filter_by),
-            FiltersViewModel.DEFAULT_STARS
-        )
-        return filter { it.rate >= minStars }
     }
 
     fun setCurrentUniverse(universeName: String) {

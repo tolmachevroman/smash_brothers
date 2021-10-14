@@ -15,3 +15,14 @@ data class Fighter(
     val description: String,
     val imageURL: String
 ) : Parcelable
+
+fun List<Fighter>.filterByRate(rate: Int): List<Fighter> = filter { it.rate >= rate }
+
+fun List<Fighter>.sortByField(sortBy: Int): List<Fighter> {
+    return when (sortBy) {
+        1 -> this.sortedBy { it.name }
+        2 -> this.sortedBy { it.price }
+        3 -> this.sortedBy { it.rate }
+        else -> this.sortedBy { it.downloads }
+    }
+}
