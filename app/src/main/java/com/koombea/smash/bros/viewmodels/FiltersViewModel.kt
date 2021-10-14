@@ -13,9 +13,17 @@ class FiltersViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
+    companion object {
+        //Values from 1..4 correspond to Name..Downloads in UI, default value is Name
+        const val DEFAULT_SORT_BY = 1
+
+        //Default value is zero stars
+        const val DEFAULT_STARS = 0
+    }
+
+
     fun getSortBy(): Int {
-        //Values from 1..4 correspond to Name..Downloads in UI
-        return sharedPreferences.getInt(resources.getString(R.string.key_sort_by), 1)
+        return sharedPreferences.getInt(resources.getString(R.string.key_sort_by), DEFAULT_SORT_BY)
     }
 
     fun setSortBy(newValue: Int) {
@@ -23,7 +31,7 @@ class FiltersViewModel @Inject constructor(
     }
 
     fun getFilterBy(): Int {
-        return sharedPreferences.getInt(resources.getString(R.string.key_filter_by), 0)
+        return sharedPreferences.getInt(resources.getString(R.string.key_filter_by), DEFAULT_STARS)
     }
 
     fun setFilterBy(newValue: Int) {
@@ -32,7 +40,7 @@ class FiltersViewModel @Inject constructor(
     }
 
     fun reset() {
-        setSortBy(1)
-        setFilterBy(0)
+        setSortBy(DEFAULT_SORT_BY)
+        setFilterBy(DEFAULT_STARS)
     }
 }
