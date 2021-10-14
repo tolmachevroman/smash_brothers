@@ -13,7 +13,10 @@ import com.koombea.smash.bros.databinding.FightersFragmentBinding
 import com.koombea.smash.bros.utils.ResourceObserver
 import com.koombea.smash.bros.viewmodels.FightersViewModel
 import com.koombea.smash.bros.views.activities.MainActivity
+import com.koombea.smash.bros.views.adapters.UniversesAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.recyclerview.widget.LinearLayoutManager
+
 
 @AndroidEntryPoint
 class FightersFragment : Fragment() {
@@ -53,7 +56,23 @@ class FightersFragment : Fragment() {
                 hideLoading = { binding.progressBar.visibility = View.GONE },
                 showLoading = { binding.progressBar.visibility = View.VISIBLE },
                 onSuccess = { universes: List<Universe> ->
-                    //TODO populate tab pager
+                    //TODO refactor
+                    context?.let {
+                        val adapter = UniversesAdapter(it, universes) { universeId ->
+                            //TODO filter fighters by universeId
+                        }
+                        binding.universesList.layoutManager = LinearLayoutManager(
+                            activity,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
+                        binding.universesList.adapter = adapter
+                    }
+
+
+                    //TODO refactor
+                    viewModel.getFighters()
+
                 },
                 onError = { errorMessage ->
                     Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()

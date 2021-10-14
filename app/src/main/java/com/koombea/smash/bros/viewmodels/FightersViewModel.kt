@@ -26,9 +26,14 @@ class FightersViewModel @Inject constructor(private val repository: SmashBrosRep
         }
 
         if (response != null) {
-            emit(Resource.success(response))
+            val universes = mutableListOf<Universe>()
+            universes.add(0, Universe("", "All", ""))
+            universes.addAll(response)
+            emit(Resource.success(universes))
         } else {
             emit(Resource.error(null, errorMessage))
         }
     }
+
+    fun getFighters() {}
 }
