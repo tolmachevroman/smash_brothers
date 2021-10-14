@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LauncherViewModel @Inject constructor(
-    val resources: Resources,
+    private val resources: Resources,
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
