@@ -53,15 +53,11 @@ class FightersFragment : Fragment() {
             setHasOptionsMenu(true)
         }
 
-        viewModel.getUniverses().observe(
-            viewLifecycleOwner, ResourceObserver(
-                javaClass.simpleName,
-                ::hideLoading,
-                ::showLoading,
-                ::showUniverses,
-                ::showErrorMessage
-            )
-        )
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            getUniverses()
+        }
+
+        getUniverses()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -74,6 +70,18 @@ class FightersFragment : Fragment() {
             findNavController().navigate(directions)
         }
         return true
+    }
+
+    private fun getUniverses() {
+        viewModel.getUniverses().observe(
+            viewLifecycleOwner, ResourceObserver(
+                javaClass.simpleName,
+                ::hideLoading,
+                ::showLoading,
+                ::showUniverses,
+                ::showErrorMessage
+            )
+        )
     }
 
     private fun showUniverses(universes: List<Universe>) {
@@ -121,6 +129,7 @@ class FightersFragment : Fragment() {
     }
 
     private fun showFighters(fighters: List<Fighter>) {
+        binding.swipeRefreshLayout.isRefreshing = false
         context?.apply {
             val adapter = FightersAdapter(this, fighters) { fighter ->
                 val directions = FightersFragmentDirections.navigateToFighterDetails(fighter)
@@ -142,7 +151,9 @@ class FightersFragment : Fragment() {
     }
 
     private fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
+        if (!binding.swipeRefreshLayout.isRefreshing) {
+            binding.progressBar.visibility = View.VISIBLE
+        }
     }
 
     private fun hideLoading() {
@@ -150,6 +161,7 @@ class FightersFragment : Fragment() {
     }
 
     private fun showErrorMessage(errorMessage: String?) {
+        binding.swipeRefreshLayout.isRefreshing = false
         Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
     }
 }
