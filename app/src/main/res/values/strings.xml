@@ -22,4 +22,6 @@
     <string name="fighters_adapter_downloads">Downloads: %1$s</string>
 
     <string name="filters_menu">Filters</string>
+
+    <string name="key_opened_before">opened_before</string>
 </resources>

@@ -4,8 +4,10 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.koombea.smash.bros.databinding.LauncherFragmentBinding
+import com.koombea.smash.bros.viewmodels.LauncherViewModel
 import com.koombea.smash.bros.views.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -13,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LauncherFragment : Fragment() {
 
     private lateinit var binding: LauncherFragmentBinding
+    private val viewModel by viewModels<LauncherViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,12 +41,16 @@ class LauncherFragment : Fragment() {
             hide()
         }
 
-        // TODO check if launched for the 1st time, or skip
-
-        //navigate to Walkthrough after 2 seconds
         view.postDelayed({
-            val directions = LauncherFragmentDirections.navigateToWalkthrough()
-            findNavController().navigate(directions)
+            if (!viewModel.hasBeenOpenedBefore()) {
+                viewModel.setHasBeenOpened()
+                val directions = LauncherFragmentDirections.navigateToWalkthrough()
+                findNavController().navigate(directions)
+            } else {
+                val directions = LauncherFragmentDirections.navigateToFighters()
+                findNavController().navigate(directions)
+            }
+
         }, 2000)
     }
 

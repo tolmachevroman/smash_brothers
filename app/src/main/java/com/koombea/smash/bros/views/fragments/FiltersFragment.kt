@@ -1,6 +1,5 @@
 package com.koombea.smash.bros.views.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment

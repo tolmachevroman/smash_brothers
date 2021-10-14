@@ -2,6 +2,7 @@ package com.koombea.smash.bros.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,5 +18,11 @@ class SharedPreferencesModule {
     @Provides
     fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
         return context.getSharedPreferences("smash_bros_preferences", Context.MODE_PRIVATE)
+    }
+
+    @Singleton
+    @Provides
+    fun provideResources(@ApplicationContext context: Context): Resources {
+        return context.resources
     }
 }

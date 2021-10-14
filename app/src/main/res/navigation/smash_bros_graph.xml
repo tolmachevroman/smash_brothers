@@ -10,7 +10,14 @@
         android:name="com.koombea.smash.bros.views.fragments.LauncherFragment">
         <action
             android:id="@+id/navigate_to_walkthrough"
-            app:destination="@id/walkthrough" />
+            app:destination="@id/walkthrough"
+            app:popUpTo="@+id/smash_bros_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/navigate_to_fighters"
+            app:destination="@id/fighters"
+            app:popUpTo="@+id/smash_bros_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
