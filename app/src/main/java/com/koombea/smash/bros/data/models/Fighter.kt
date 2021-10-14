@@ -10,5 +10,6 @@ data class Fighter(
     val popular: Boolean,
     val rate: Int,
     val downloads: String,
-    val description: String
+    val description: String,
+    val imageURL: String
 ) : Serializable

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.koombea.smash.bros.R
 import com.koombea.smash.bros.data.models.Universe
 import com.koombea.smash.bros.databinding.FightersFragmentBinding
@@ -16,6 +17,7 @@ import com.koombea.smash.bros.views.activities.MainActivity
 import com.koombea.smash.bros.views.adapters.UniversesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.koombea.smash.bros.views.adapters.FightersAdapter
 
 
 @AndroidEntryPoint
@@ -77,6 +79,19 @@ class FightersFragment : Fragment() {
                             hideLoading = { binding.progressBar.visibility = View.GONE },
                             showLoading = { binding.progressBar.visibility = View.VISIBLE },
                             onSuccess = { fighters ->
+                                //TODO refactor
+                                context?.let {
+                                    val adapter = FightersAdapter(it, fighters) { fighter ->
+                                        //TODO navigate to details
+                                    }
+                                    binding.fightersList.layoutManager = LinearLayoutManager(
+                                        activity,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
+                                    binding.fightersList.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                                    binding.fightersList.adapter = adapter
+                                }
 
 
                             },
