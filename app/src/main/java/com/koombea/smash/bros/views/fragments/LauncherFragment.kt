@@ -41,9 +41,9 @@ class LauncherFragment : Fragment() {
             hide()
         }
 
+        val hasBeenOpenedBefore = viewModel.hasBeenOpenedBefore()
         view.postDelayed({
-            if (!viewModel.hasBeenOpenedBefore()) {
-                viewModel.setHasBeenOpened()
+            if (!hasBeenOpenedBefore) {
                 val directions = LauncherFragmentDirections.navigateToWalkthrough()
                 findNavController().navigate(directions)
             } else {
@@ -54,4 +54,8 @@ class LauncherFragment : Fragment() {
         }, 2000)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.setHasBeenOpened()
+    }
 }
