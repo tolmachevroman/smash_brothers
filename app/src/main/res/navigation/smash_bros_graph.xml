@@ -18,7 +18,9 @@
         android:name="com.koombea.smash.bros.views.fragments.WalkthroughFragment">
         <action
             android:id="@+id/navigate_to_fighters"
-            app:destination="@id/fighters" />
+            app:destination="@id/fighters"
+            app:popUpTo="@+id/smash_bros_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -31,7 +33,5 @@
 
     <fragment
         android:id="@+id/filters"
-        android:name="com.koombea.smash.bros.views.fragments.FiltersFragment">
-
-    </fragment>
+        android:name="com.koombea.smash.bros.views.fragments.FiltersFragment" />
 </navigation>

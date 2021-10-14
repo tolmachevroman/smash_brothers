@@ -1,14 +1,15 @@
 package com.koombea.smash.bros.views.fragments
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.koombea.smash.bros.databinding.FiltersFragmentBinding
 import com.koombea.smash.bros.viewmodels.FiltersViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import com.koombea.smash.bros.R
+import com.koombea.smash.bros.views.activities.MainActivity
 
 @AndroidEntryPoint
 class FiltersFragment : Fragment() {
@@ -26,6 +27,10 @@ class FiltersFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        (activity as MainActivity).supportActionBar?.apply {
+            show()
+            title = getString(R.string.filters)
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 }

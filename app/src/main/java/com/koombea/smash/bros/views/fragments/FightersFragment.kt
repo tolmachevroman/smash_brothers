@@ -1,9 +1,8 @@
 package com.koombea.smash.bros.views.fragments
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +12,7 @@ import com.koombea.smash.bros.data.models.Universe
 import com.koombea.smash.bros.databinding.FightersFragmentBinding
 import com.koombea.smash.bros.utils.ResourceObserver
 import com.koombea.smash.bros.viewmodels.FightersViewModel
+import com.koombea.smash.bros.views.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,12 +31,20 @@ class FightersFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.toolbar.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.filters) {
-                val directions = FightersFragmentDirections.navigateToFilters()
-                findNavController().navigate(directions)
-            }
-            true
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            activity?.window?.insetsController?.show(WindowInsets.Type.statusBars())
+        } else {
+            activity?.window?.clearFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+
+        (activity as MainActivity).supportActionBar?.apply {
+            title = getString(R.string.fighters)
+            show()
+            setDisplayHomeAsUpEnabled(false)
+            setHasOptionsMenu(true)
         }
 
         viewModel.getUniverses().observe(
@@ -52,6 +60,18 @@ class FightersFragment : Fragment() {
                 }
             )
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        return inflater.inflate(R.menu.filters_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.filters) {
+            val directions = FightersFragmentDirections.navigateToFilters()
+            findNavController().navigate(directions)
+        }
+        return true
     }
 
 }
